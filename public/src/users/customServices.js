@@ -12,7 +12,7 @@
           var editorInfo = {data : {}};
           var pageDetails = {view : 'bunks' , page : 1};
           
-          //
+          
           function search(params){ 
              var promise = $q.defer();
              
