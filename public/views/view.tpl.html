@@ -244,5 +244,56 @@
       </md-toolbar>
        
   <ui-view name="h_space"></ui-view>
+
+  <div layout="row" layout-align="center center" class="footer">
+      <div class="footer-sm" flex-gt-sm="67"layout="column" layout-align="center center" ng-show="!bigScreen()" >
+        <md-whiteframe class="md-whiteframe-0dp inner" >
+           <span class="md-primary" style="color:#B0B5BE" >
+               2015 &copy; upbunk, inc.
+           </span><br />
+           <span class="md-primary">
+               <a  ui-sref="o.about">About us</a>
+               <a  ui-sref="o.privacy">Privacy</a>
+               <a  ui-sref="o.FAQ">Blog</a>
+               <a  ui-sref="o.FAQ">FAQ</a>
+               <a  ui-sref="o.disclaimer">Disclaimer</a>
+               <a  ui-sref="o.FAQ">Developers</a>
+               <a  ui-sref="o.FAQ">Jobs</a>
+           </span>
+         </md-whiteframe>
+      </div>
+      <div flex-gt-sm="100" layout="row" layout-align="center center" ng-show="bigScreen()">
+          <div flex-gt-sm="20" layout="column" layout-align="start center" class="" style="height:20em; padding:0;">
+             <img src="/src/img/logo.w.t.png" style="height:14em" class="" alt="">
+             <span class="md-primary" style="color:#B0B5BE" >
+              2015 &copy; upbunk, ltd.
+           </span><br />
+           </div>
+           <div class="footer-lg" flex-gt-sm="60" layout="row" layout-align="center center" >
+              <div class="section" >
+                   <h3>PARTNERS</h3>
+                   <span >Palingram</span>
+                   <span >upbunk</span>
+                   <span >koboneer</span> 
+                   <span >leclog</span>
+                   <span >purslr</span>
+              </div>
+               <div class="section" >
+                   <h3 >CONTACT</h3>
+                   <span >About Us</span>
+                   <span >Privacy</span>
+                   <span >Disclaimer</span>
+              </div>
+              <div class="section">
+                   <h3 >SOCIAL</h3>
+                   <span >
+                    twitter</span>
+                   <span >facebook</span>
+                    <span > instagram</span>
+              </div>
+            </div>
+      </div>
+  </div>
+  
  </md-content>
 </section>

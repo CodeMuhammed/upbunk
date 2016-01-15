@@ -7,7 +7,7 @@
 
              //Tests if user is on a desktop device
              $scope.bigScreen = function(){
-                 return $mdMedia('gt-md');
+                 return $mdMedia('gt-md'); //
              };
 
              //
