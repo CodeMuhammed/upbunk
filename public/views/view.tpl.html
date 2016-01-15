@@ -1,0 +1,248 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" layout="column"  md-swipe-left="onSwipe('left')">
+        
+        <md-content flex="100" layout="column" role="navigation" ss-style-color="{'background-color': 'primary.default'}">  
+               <md-whiteframe class="md-whiteframe-2dp" layout="column"  style="min-height:10em; padding:0; background: url('src/img/bg-d.gif');">
+                  <span layout="row" layout="center center">
+                        <img ng-src="{{loggedInUser.profile_details.img}}" alt="" height="60" width="60" style="border-radius:30px" class="md-avatar" />
+                        <span style="margin-top:1.4em; margin-left:.5em; color:#81C784; font-weight:bolder">{{loggedInUser.username}}</span>
+                        <span flex></span>
+                        <md-button class="" aria-label="hello" ng-click="signOut()">
+                          <ng-md-icon icon="logout" style="fill:red" md-menu-align-target ></ng-md-icon>
+                        </md-button>
+                  </span>
+               </md-whiteframe>
+               
+               <ss-sidenav flex menu="menu"></ss-sidenav>
+        </md-content>
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right" layout="column" md-swipe-right="onSwipe('right')">
+      
+      <md-content layout-padding ng-if="view == 'signin'">
+        <md-whiteframe class="md-whiteframe-2dp" layout="row" layout-align="center center" style="margin-bottom:2em; padding:0">
+              <md-button ng-click="toggleView('password')">
+                    <ng-md-icon icon="lock" md-menu-align-target ></ng-md-icon> forgot
+                     
+              </md-button>
+              
+              <md-button ng-click="toggleView('signup')">
+                    <ng-md-icon icon="person_add" md-menu-align-target ></ng-md-icon> Sign up
+                     
+              </md-button>
+        </md-whiteframe>
+        
+        <form name="signin">
+          <md-input-container>
+            <label for="Emailorusername">Email address or username</label>
+            <input type="text"
+                   name="email"
+                   ng-model="oldUser.username" 
+                   md-autofocus
+                   md-maxlength="40"
+                   minlength="5"
+                   required>
+            <div ng-messages="signin.email.$error">
+                <div ng-message="required">* <span ng-if="oldEmailVerdict">The email or the username doesn't exist </span></div>
+                <div ng-message="md-maxlength  , minlength">The username has to be more than 5 characters or less than 40 characters long.</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+            <label for="password">Password</label>
+            <input type="password"
+                   ng-model="oldUser.password"
+                   name = "password"
+                   required>
+            <div ng-messages="signin.password.$error">
+                <div ng-message="required">* <span ng-if="passwordVerdict">The password is wrong</span></div>
+            </div>
+          </md-input-container>
+        </form>
+
+        <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center end" style="margin-top:1em; padding:0">
+              <md-button class=" md-raised md-primary md-cornered"  style="margin:0px; width:100%; color:#fff" ng-click="signIn(oldUser)" ng-disabled="signin.$invalid">
+                     sign in
+                     <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+              </md-button>
+              <md-progress-linear md-mode="indeterminate" ng-show="processing"></md-progress-linear>
+        </md-whiteframe>
+
+      </md-content>
+      <md-content layout-padding ng-if="view == 'password'">
+        <md-whiteframe class="md-whiteframe-2dp" layout="row" layout-align="center center" style="margin-bottom:2em; padding:0">
+              <md-button class="md-cornered" ng-click="toggleView('signin')">
+                     Back to sign in
+                     <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+              </md-button>
+        </md-whiteframe>
+       
+        <form name="passwordRecover">
+              <md-input-container>
+                <label for="Emailorusername">Email address or username</label>
+                <input type="text"
+                       name="email"
+                       ng-model="retrieve.username" 
+                       md-autofocus
+                       md-maxlength="40"
+                       minlength="5"
+                       required>
+                <div ng-messages="passwordRecover.email.$error">
+                    <div ng-message="required">* <span ng-if="recoverVerdict">The email or the username doesn't exist </span></div>
+                    <div ng-message="md-maxlength  , minlength">The username has to be more than 5 characters or less than 40 characters long.</div>
+                </div>
+              </md-input-container>
+
+              <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center end" style="margin-top:1em; padding:0">
+                  <md-button class=" md-raised md-primary md-cornered"  style="margin:0px; width:100%; color:#fff" ng-click="recoverPassword(retrieve)" ng-disabled="passwordRecover.$invalid">
+                         Retrieve Password
+                         <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+                  </md-button>
+                  <md-progress-linear md-mode="indeterminate" ng-show="processing"></md-progress-linear>
+            </md-whiteframe>
+        </form>
+
+       </md-content>
+
+      <md-content layout-padding ng-if="view == 'signup'">
+        <form name="signup">
+          <md-input-container>
+            <label for="email">Email address</label>
+            <input type="email"
+                   id="Email"
+                   name="email"
+                   ng-model="newUser.email"
+                   required>
+            <div ng-messages="signup.email.$error">
+                <div ng-message="required">* <span ng-if="newEmailVerdict">The email already exists</span></div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+            <label for="email">Phone Number</label>
+            <input type="phone"
+                   id="Phone"
+                   name="phone"
+                   ng-model="newUser.phone"
+                   required
+                   phone>
+            <div ng-messages="signup.phone.$error">
+                <div ng-message="required">*</div>
+                <div ng-message="phone">The phone number is not valid</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+            <label for="username">User Name</label>
+            <input type="text"
+                   id="UserName"
+                   name="username"
+                   ng-model="newUser.username"
+                   minlength="5"
+                   md-maxlength="20"
+                   required
+                   username>
+            <div ng-messages="signup.username.$error">
+                <div ng-message="required">* <span ng-if="usernameVerdict">user name already exists</span></div>
+                <div ng-message="minlength">The username is too short</div>
+                <div ng-message="md-maxlength">The username is too long</div>
+                <div ng-message="username">The username must be all lowercase and numbers only</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+            <label for="username">Full Name</label>
+            <input type="text"
+                   id="FullName"
+                   name="fullname"
+                   ng-model="newUser.fullname"
+                   required
+                   minlength="5"
+                   md-maxlength="40"
+                   fullname>
+            <div ng-messages="signup.fullname.$error">
+                <div ng-message="required">*</div>
+                <div ng-message="minlength">The name is too short</div>
+                <div ng-message="md-maxlength">The name is too long</div>
+                <div ng-message="fullname">Name should be in this format "firstname" "single space" "lastname"</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+            <label for="username">Password</label>
+            <input type="password"
+                   id="Password"
+                   name="password"
+                   ng-model="newUser.password"
+                   ng-change="newUser.passwordCompare = ''"
+                   required
+                   minlength="5"
+                   md-maxlength="40">
+            <div ng-messages="signup.password.$error">
+                <div ng-message="required">*</div>
+                <div ng-message="minlength">The password is too short</div>
+                <div ng-message="md-maxlength">The password is too long</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container>
+            <label for="username">Re-enter password</label>
+            <input type="password"
+                   id="PasswordCompare"
+                   name="passwordCompare"
+                   ng-model="newUser.passwordCompare"
+                   required
+                   maxlength="40"
+                   compare = "">
+            <div ng-messages="signup.passwordCompare.$error">
+                <div ng-message="required">*</div>
+                <div ng-message="compare">Passwords do not match</div>
+            </div>
+          </md-input-container>
+        </form>
+
+        <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center end" style="margin-top:1em; padding:0">
+            <md-button class=" md-raised md-primary md-cornered"  style="margin:0px; width:100%; color:#fff" ng-click="signUp(newUser)" ng-disabled="signup.$invalid">
+                   Sign up
+                   <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+            </md-button>
+            <md-progress-linear md-mode="indeterminate" ng-show="processing"></md-progress-linear>
+        </md-whiteframe>
+
+        <md-whiteframe class="md-whiteframe-2dp" layout="row" layout-align="center center" style="margin-top:1em; padding:0">
+              <h3>Existing user ? </h3>
+              <md-button class="md-cornered" ng-click="toggleView('signin')">
+                     Sign in
+                     <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+              </md-button>
+        </md-whiteframe>
+
+      </md-content>
+</md-sidenav>
+
+<section layout="row" flex = "grow">  
+     <md-content flex="auto">
+      <md-toolbar class="md-primary md-hue-1 " style="background-color:#689a5a">
+        <div class="md-toolbar-tools md-toolbar-tools-bottom main-toolbar">
+
+          <img src="src/img/logo.w.t.png" alt="" style="margin-left:0px; height:80px; max-width:80px" ng-click="toggle(loggedInUser ? 'left' : 'right')"/>
+          <span style="color:#fff; font-weight:bolder">upbunk</span>
+          <span flex></span>
+          <md-button aria-label="signin" class="md-raised md-mini" ng-show="!auth" ng-click="toggle('right')" style="">
+              sign in
+              <ng-md-icon icon="login" style="" md-menu-align-target ></ng-md-icon>
+          </md-button>
+          <span ng-show="bigScreen() || (!bigScreen() && auth)">
+                <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+                  <ng-md-icon icon="facebook" style="fill:#337ab7" md-menu-align-target ></ng-md-icon>
+                </md-button>
+                <md-button aria-label="twitter"  class="md-fab md-raised md-mini">
+                  <ng-md-icon icon="twitter" style="fill:#5bc0de" md-menu-align-target ></ng-md-icon>
+                </md-button>
+          </span>
+          
+        </div>
+      </md-toolbar>
+       
+  <ui-view name="h_space"></ui-view>
+ </md-content>
+</section>

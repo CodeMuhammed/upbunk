@@ -1,0 +1,232 @@
+<md-tabs md-dynamic-height md-selected="selectedIndex" md-border-bottom md-autoselect>
+          <md-tab>
+                  <md-tab-label><ng-md-icon icon="search" md-menu-align-target ></ng-md-icon> Search</md-tab-label>
+                  <md-tab-body>
+
+                     <div layout="row" layout-align="center end" class="header">
+                          <div  layout="column" layout-align="center center" >
+                               <md-whiteframe class="md-whiteframe-0dp inner" layout="column" layout-align="center center" >
+                                 <div class="heading" layout="column" layout-align="center center">
+
+                                     <div class="text">
+                                         <h1>FEEL AT-HOME IN SCHOOL</h1>
+                                         <span>Choose from hundreds of apartments near your campus for rent ..</span>
+                                     </div>
+                                     <md-divider></md-divider>
+                                     <div class="search-dummy" layout="row" layout-align="center center" ng-show="isSmall()" flex="grow" ng-click="scrollToSearch()">
+                                         <div layout="row" layout-align="center center">
+                                             Where do you want to stay?
+                                         </div>
+                                         <div layout="row" layout-align="center center">
+                                            <md-button>
+                                                <ng-md-icon icon="search" md-menu-align-target ></ng-md-icon>
+                                            </md-button>
+                                            
+                                         </div>
+                                        
+                                     </div>
+                                  
+                                     <div layout="row" layout-align="center center" class="search" style="padding:1em .6em; margin-top:2em;"  ng-hide="isSmall()">
+                                          
+                                         
+                                            <md-autocomplete
+                                                class="mdac"
+                                                style="margin-right:.2em; border-radius:0px;height:3em"
+                                                layout="column" layout-align="center center"
+                                                ng-repeat="field in searchFields"
+                                                style="margin-bottom:1em; width:33.3%"
+                                                ng-disabled="field.isDisabled"
+                                                md-no-cache="field.noCache"
+                                                md-selected-item="field.selectedItem"
+                                                md-search-text-change="field.searchTextChange(field.searchText)"
+                                                md-search-text="field.searchText"
+                                                md-selected-item-change="field.selectedItemChange(item)"
+                                                md-items="item in field.querySearch()"
+                                                md-item-text="item"
+                                                md-min-length="0"
+                                                placeholder="{{field.placeholder}}">
+                                              <md-item-template >
+                                                <span md-highlight-text="field.searchText" md-highlight-flags="^i">
+                                                    {{item}}
+                                                </span>
+                                              </md-item-template>
+                                              <md-not-found>
+                                                No states matching "{{field.searchText}}" were found.
+                                                <a ng-click="field.newState(field.searchText)">Create a new one!</a>
+                                              </md-not-found>
+                                            </md-autocomplete>
+                                            
+                                            
+
+                                             <md-whiteframe style="margin-right:.3em; background-color:#fff; padding:.15em 1em; height:3em;background-color:#689A5A;" ng-click="showResults()" aria-label="sr" layout="column" layout-align="center center">
+                                                <md-button style="color:#fff" ng-disabled="minReq()" >
+                                                  Search
+                                                </md-button>
+                                            </md-whiteframe>
+
+                                      </div>
+                                    </div>
+                               </md-whiteframe>
+                          </div>
+                     </div>
+
+
+                     <div layout="row" layout-align="center center" style="width:100%; padding: 5px; background: url('src/img/bg-d.gif');" ng-show="isSmall()">
+                          <div flex-gt-sm="67" layout="column" layout-align="center center" style=" width:90%; padding:1em 0em">
+                               <span style="font-size:1.5em; font-weight:5; padding:1em 0">Search : in 5 easy steps.</span>
+                               <md-autocomplete
+                                  style="margin-bottom:1em; width:100%"
+                                  ng-repeat="field in searchFields"
+                                  ng-disabled="field.isDisabled"
+                                  md-no-cache="field.noCache"
+                                  md-selected-item="field.selectedItem"
+                                  md-search-text-change="field.searchTextChange(field.searchText)"
+                                  md-search-text="field.searchText"
+                                  md-selected-item-change="field.selectedItemChange(item)"
+                                  md-items="item in field.querySearch()"
+                                  md-item-text="item"
+                                  md-min-length="0"
+                                  placeholder="{{field.placeholder}}">
+                                <md-item-template>
+                                  <span md-highlight-text="field.searchText" md-highlight-flags="^i">{{item}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                  No states matching "{{field.searchText}}" were found.
+                                  <a ng-click="field.newState(field.searchText)">Create a new one!</a>
+                                </md-not-found>
+                              </md-autocomplete>
+                              <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center start" flex="100" style="margin-top:1em; margin-bottom:1em; padding:0; width:100%" ng-show="isSmall()">
+                                    <md-button class=" md-raised md-cornered"  style="margin:0px;height:3em; width:100%; color:#fff; background-color:#689a5a" ng-disabled="minReq()" ng-click="showResults()">
+                                           search
+                                           <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+                                    </md-button>
+                                    <md-progress-linear md-mode="indeterminate" ng-show="processing"></md-progress-linear>
+                              </md-whiteframe>
+                          </div>
+                     </div>
+
+                    <div layout="column" layout-align="center center" style="padding: 5px; background: url('src/img/bg-d.gif');">
+                          <div flex-gt-sm="67"  ng-show="processing && bigScreen()" layout="row" layout-align="center center" style=" padding:1em .6em">
+                            <md-progress-circular ng-show="processing" md-diameter="20" md-mode="indeterminate"></md-progress-circular>
+                               Loading results ....
+                          </div>
+                          <div ng-if="resultScreen" layout="row" layout-align="center center" style=" padding:0; max-width:{{bigScreen()?'80%' : '100%'}}">
+                                <bunks ng-if="activeView == 'bunks'"></bunks>
+                                <bunk ng-if="activeView == 'bunk'"></bunk>
+                          </div>
+                     </div>
+                     
+                     <div class="traction" layout="column" layout-align="center start" style="">
+                         <div class="text" flex-gt-sm="30"  layout="column" layout-align="center start">
+                              <h1>More than <span style="color:#689A5A;">200</span>
+                                <span ng-show="!bigScreen()">Properties available for rent</span></h1>
+                              <h1 ng-show="bigScreen()">Properties available for rent</h1>
+                          
+                         </div>
+                     </div>
+
+                     <div class="features" layout="column" layout-align="start center">
+                           <div class="f-header">
+                              How it works ! 
+                           </div>
+                           <div class="f-div" layout="row" layout-sm="column" layout-align="space-between center">
+                                <div layout="column" layout-align="center center">
+                                      <div style="width:200px; height:200px; background:#fff; border-radius:1000px" layout="row" layout-align="center center">                                             <ng-md-icon icon="search" size="100" style="margin-left:50px; fill:#689A5A"md-menu-align-target ></ng-md-icon>
+                                      </div>
+                                       <div class="text">
+                                           <h2>Search</h2>
+                                           With  over 25,000 apartments indexed form over 750 areas across 50 schools, you are never  short of options to choose from.
+                                       </div>
+                                </div>
+                                <div class="center-f" layout="column" layout-align="center center">
+                                      <div style="width:250px; height:250px; background:#fff; border-radius:1000px" layout="row" layout-align="center center">
+                                           
+                                           <ng-md-icon icon="lock_open" size="100" style="margin-left:80px; fill:#689A5A" md-menu-align-target ></ng-md-icon>
+                                      </div>
+                                    
+                                       <div class="text">
+                                          <h2>Unlock</h2>
+                                          
+                                       </div>
+                                </div>
+                                <div layout="column" layout-align="center center">
+                                      <div style="width:200px; height:200px; background:#fff; border-radius:1000px" layout="row" layout-align="center center">
+                                          
+                                          <ng-md-icon icon="home" size="100" style="margin-left:50px; fill:#689A5A" md-menu-align-target ></ng-md-icon>
+                                      </div>
+                                       <div class="text">
+                                           <h2>Rent</h2>
+                                          Once you have successfully unlocked an apartment listing (s), you simply contact the agent in charge of the apartment and rent it.
+                                       </div>
+                                </div>
+                           </div>
+                      </div>
+                      <div layout="row" layout-align="center center" class="footer">
+                      <div class="footer-sm" flex-gt-sm="67"layout="column" layout-align="center center" ng-show="!bigScreen()" >
+                        <md-whiteframe class="md-whiteframe-0dp inner" >
+                           <span class="md-primary" style="color:#B0B5BE" >
+                               2015 &copy; upbunk, inc.
+                           </span><br />
+                           <span class="md-primary">
+                               <a  ui-sref="o.about">About us</a>
+                               <a  ui-sref="o.privacy">Privacy</a>
+                               <a  ui-sref="o.FAQ">Blog</a>
+                               <a  ui-sref="o.FAQ">FAQ</a>
+                               <a  ui-sref="o.disclaimer">Disclaimer</a>
+                               <a  ui-sref="o.FAQ">Developers</a>
+                               <a  ui-sref="o.FAQ">Jobs</a>
+                           </span>
+                         </md-whiteframe>
+                      </div>
+                      <div flex-gt-sm="100" layout="row" layout-align="center center" ng-show="bigScreen()">
+                          <div flex-gt-sm="20" layout="column" layout-align="start center" class="" style="height:20em; padding:0;">
+                             <img src="/src/img/logo.w.t.png" style="height:14em" class="" alt="">
+                             <span class="md-primary" style="color:#B0B5BE" >
+                              2015 &copy; upbunk, ltd.
+                           </span><br />
+                           </div>
+                           <div class="footer-lg" flex-gt-sm="60" layout="row" layout-align="center center" >
+                              <div class="section" >
+                                   <h3>PARTNERS</h3>
+                                   <span >Palingram</span>
+                                   <span >upbunk</span>
+                                   <span >koboneer</span> 
+                                   <span >leclog</span>
+                                   <span >purslr</span>
+                              </div>
+                               <div class="section" >
+                                   <h3 >CONTACT</h3>
+                                   <span >About Us</span>
+                                   <span >Privacy</span>
+                                   <span >Disclaimer</span>
+                              </div>
+                              <div class="section">
+                                   <h3 >SOCIAL</h3>
+                                   <span >
+                                    twitter</span>
+                                   <span >facebook</span>
+                                    <span > instagram</span>
+                              </div>
+                            </div>
+                      </div>
+                  </div>
+                   
+            </md-tab-body>
+          </md-tab>
+
+          <md-tab ng-disabled="!(loggedInUser.username == 'schukwuma1' || loggedInUser.username == 'codemuhammed')">
+                <md-tab-label><ng-md-icon icon="add" md-menu-align-target ></ng-md-icon> New Listing</md-tab-label>
+                <md-tab-body>
+                    <new-listing ng-if="selectedIndex == 1 && infoSet">
+                    </new-listing>
+               </md-tab-body>
+         </md-tab>
+
+         <md-tab ng-disabled="!auth">
+                <md-tab-label><ng-md-icon icon="account_circle" md-menu-align-target ></ng-md-icon> Profile</md-tab-label>
+                <md-tab-body>
+                     <profile ng-if="selectedIndex == 2 ">
+                    </profile>
+               </md-tab-body>
+         </md-tab>
+    </md-tabs>

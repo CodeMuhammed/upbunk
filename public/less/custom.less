@@ -1,0 +1,289 @@
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+//** Deprecated `@screen-xs` as of v3.0.1
+@screen-xs:                  480px;
+//** Deprecated `@screen-xs-min` as of v3.2.0
+@screen-xs-min:              @screen-xs;
+//** Deprecated `@screen-phone` as of v3.0.1
+@screen-phone:               @screen-xs-min;
+
+// Small screen / tablet
+//** Deprecated `@screen-sm` as of v3.0.1
+@screen-sm:                  768px;
+@screen-sm-min:              @screen-sm;
+//** Deprecated `@screen-tablet` as of v3.0.1
+@screen-tablet:              @screen-sm-min;
+
+// Medium screen / desktop
+//** Deprecated `@screen-md` as of v3.0.1
+@screen-md:                  992px;
+@screen-md-min:              @screen-md;
+//** Deprecated `@screen-desktop` as of v3.0.1
+@screen-desktop:             @screen-md-min;
+
+// Large screen / wide desktop
+//** Deprecated `@screen-lg` as of v3.0.1
+@screen-lg:                  1200px;
+@screen-lg-min:              @screen-lg;
+//** Deprecated `@screen-lg-desktop` as of v3.0.1
+@screen-lg-desktop:          @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
+
+.header {
+	width:100%;
+    padding: 0px 5px;
+    background-size:cover;
+    
+    background: url('../src/img/houses.jpg') center center no-repeat;
+		      background-size:cover;
+    >div{
+        height:600px;
+       
+        padding:1em 0;
+        
+       @media (max-width: @screen-sm-max) {
+	       height:500px;
+	    }
+        .inner {
+           text-align:center;
+           width:100%;
+           .heading{
+              background:rgba(0,0 ,0, .6);
+              padding:1em;
+              //border-radius:20px;
+
+              padding-top:2em;
+              min-height:17em;
+              width:100%;
+              @media (max-width: @screen-sm-max) {
+			       border-radius:0px;
+			       //max-height:10em;
+			    }
+              .search-dummy {
+                  width:100%;
+                  margin-top:4em;
+                 >div {
+                     height:3em;
+                     &:first-child{
+                        width:85%;
+                        background-color:#fff;
+                     }
+                     &:last-child{
+                        width:15%;
+                        background-color:#689A5A;
+                        color:#fff;
+                     }
+                 }
+              }
+
+              .text { 
+                  text-shadow: .01em .01em #ccc;
+                  color:#f0f0f0;
+                  font-weight:light;
+                   h1 {
+                      font-size : 3em;
+                      margin-bottom:.3em;
+                      font-weight:bold;
+                   }
+                   span {
+                      font-size:1.3em;
+                   }
+                   @media (max-width: @screen-sm-max) {
+				        h1 {
+	                      font-size : 2em;
+	                   }
+	                   span {
+	                      font-size:1.2em;
+	                   }
+				   }
+              }
+           }
+        }
+    }
+}
+
+.main-toolbar {
+    @media (max-width: @screen-sm-max) {
+	    padding:0 !important;
+	}
+	
+}
+
+.sub-header {
+	 height: 1em !important;
+}
+
+.result-view{
+	  margin-bottom:1em; padding:.2em .4em;
+	  >div {
+	     width:100%;
+	     height:30em; 
+	     @media (max-width: @screen-sm-max) {
+	         height:18em; 
+	     }
+	  }
+}
+
+.listing{
+	padding:30px;
+	@media (max-width: @screen-sm-max) {
+         padding:10px;
+     }
+}
+
+.features{
+     padding: 0px;
+     padding-top:2em;
+     background-color:#689a5a;
+     min-height:30em;
+
+	.f-header {
+	   color:#fff; 
+	   font-size:2.5em;
+	   margin-bottom:1.5em;
+	   font-weight:bolder;
+	}
+	.f-div{
+	   .center-f{
+	      margin-left:2em;
+	      margin-right:2em;
+	   }
+	    >div {
+	       margin-bottom:3em;
+	       width:300px;
+	       h2 {
+                font-weight:bolder;
+	       }
+	       
+	       .text{
+	          text-align:center; 
+	          color:#fff;
+	          font-weight:bold;
+	          @media (max-width: @screen-sm-max) {
+		         font-size:.9em; 
+		      }
+	       }
+	    }
+	}
+}
+
+.traction {
+      background: url('../src/img/traction.jpg') center center no-repeat;
+	  background-size:cover;
+	  height:30em;
+	  .text {
+	     padding-left:5em;
+	     h1 {
+            font-size:3em;
+            line-height:1.2em;
+	     }
+	     >span {
+	        padding:1em;
+	        border:3px solid #689A5A;
+	        height:2em; 
+	        margin-top:1.2em;
+	        font-size:1.5em;
+	        color:#689A5A;
+	        &:hover {
+	           display:inline-block;
+	           color:#fff;
+	           background-color:#689A5A;
+	        }
+	     }
+	     @media (max-width: @screen-sm-max) {
+	        padding-left:1em; 
+	        line-height:.7em;
+	     }
+	  }
+}
+
+//Just giving our container Height and Width + A Red border
+#map-canvas{
+    height: 400px;
+     @media (max-width: @screen-sm-max) {
+	      height:300px; 
+	 }
+    width:  100%;
+    border: 2px solid #689A5A;
+}
+
+.footer {
+     height:30em;
+	 width:100%; 
+	 padding: 5px; 
+	 background-color:#343742;
+	 .footer-sm{
+	    //background-color:#fff; 
+	    width:100%;
+	    padding:0;
+	    .inner{
+	        padding:.7em;
+	        width:100%; 
+	        text-align:center;
+	        span { 
+	           display:block;
+	           &:first-child{
+	               margin-top:1em;
+	               color:#000;
+	               font-weight:light;
+	               font-size:1em;
+	               padding-bottom:.2em;
+	           }
+	           &:last-child{
+	              color:#000; 
+	              font-weight:light; 
+	              font-size:1em;
+
+	              a{
+	                 outline:none;
+                     text-decoration:none !important;
+	                 display:inline-block;
+	                 font-weight:bold;
+	                 color:#B0B5BE;
+	                 margin-right:1em;
+	                 margin-bottom:1em;
+	                 &:hover{
+	                    color:#689A5A;
+	                 }
+	              }
+	           }
+	        }
+	     }
+	 }
+
+	 .footer-lg{
+	     height:20em; 
+	     padding:0;
+	     .section {
+	         height:20em;
+	         color:#B0B5BE;
+	         width:33%;
+	         h3{
+	            font-weight:bold;
+	            color:#fff;
+	         }
+	         >span {
+	            display:inline-block;
+	            width:100%; 
+	            font-size:1.3em; 
+	            margin-bottom:.7em;
+	            &:hover{
+	               color:#fff;
+	            }
+	         }
+	     }
+	 }
+}
+
+.mdac{
+	>input { 
+	  padding:2em;
+	}
+}

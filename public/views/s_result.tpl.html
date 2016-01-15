@@ -1,0 +1,175 @@
+<md-toolbar style="background-color:#f0f0f0" flex="100">
+  <div class="md-toolbar-tools md-toolbar-tools-bottom">
+    <md-button class="" ng-click="back()">
+       <ng-md-icon icon="arrow_back"  style="fill:#0000" md-menu-align-target></ng-md-icon> Apartments list
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-content layout="row" class="listing">
+  
+  <div flex-sm="100" flex-gt-md="67">
+          <md-whiteframe class="md-whiteframe-2dp" flex="100" layout = "column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em" ng-hide="!bigScreen">
+              <h3>
+                 {{searchFields[2].selectedItem || searchFields[2].placeholder}} 
+                 apartments in 
+                 <b style="bolder">{{searchFields[0].selectedItem || searchFields[0].placeholder}}</b>
+                 <b style="bolder">{{searchFields[1].selectedItem || searchFields[1].placeholder}}</b>
+                 Within the price range of
+                   {{searchFields[3].selectedItem || searchFields[3].placeholder}} 
+                  located in <b>{{searchFields[4].selectedItem || searchFields[4].placeholder}}</b> area
+               </h3>
+          </md-whiteframe>
+         <md-whiteframe class="md-whiteframe-1dp" flex="grow" layout= "row" layout-align="start top" style="padding:.2em .4em; ">
+            <h4 style="font-weight:bolder;">
+               {{apartment.name}}
+            </h4>
+            <div flex></div>
+
+            <md-button href="tel:{{apartment.agent_phone}} " aria-label="Open demo menu" class="md-icon-button" ng-hide="isLocked">
+                  <ng-md-icon icon="phone"  style="fill:#61A564" md-menu-align-target></ng-md-icon>
+            </md-button>
+             <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="checkCall()" ng-show="isLocked">
+                  <ng-md-icon icon="phone"  style="fill:#61A564" md-menu-align-target></ng-md-icon>
+            </md-button>
+
+            <md-button class="md-icon-button" ng-show="apartment.availability" ng-click="alertInterest(apartment , $event)">
+              <ng-md-icon icon="{{isFavourite(apartment) ? 'favorite' : 'favorite_outline'}}"  style="fill:red" md-menu-align-target></ng-md-icon>
+              {{apartment.interested_bunkees.length}}
+           </md-button>
+           <md-button class="md-icon-button" ng-click="unlock()"  ng-show="isLocked">
+              <ng-md-icon icon="lock"  style="" md-menu-align-target></ng-md-icon>
+           </md-button>
+            
+      </md-whiteframe>
+
+      <md-whiteframe class="md-whiteframe-1dp result-view" layout="column" layout-align="center end"  md-swipe-left="next()" md-swipe-right="prev()" style="padding:0">
+          <div layout="row" layout-align="center center" style="background: url( {{apartment.images_url[startIndex]}}) center center no-repeat; background-size:cover;padding:0;">
+                <ng-md-icon icon="chevron_left" ng-click="prev()" style="fill:#fff" md-menu-align-target></ng-md-icon>
+                <div flex></div>
+                <ng-md-icon icon="chevron_right"ng-click="next()"  style="fill:#fff" md-menu-align-target></ng-md-icon>
+          </div>
+      </md-whiteframe>
+
+      <md-whiteframe class="md-whiteframe-1dp" layout="column" layout-align="center start" style="margin-bottom:1em;margin-top:1em; padding:.2em .4em; width:100%">
+         <h3 style="font-weight:bold;">Apartment Description</h3>
+         <p style="min-height:5em">
+            {{apartment.description}}
+         </p>
+      </md-whiteframe>
+
+      <md-whiteframe class="md-whiteframe-1dp" layout="column" layout-align="center start" style="margin-bottom:1em;margin-top:1em; padding:.2em .4em">
+          <h3 style="font-weight:bold;">
+             Available facilities
+          </h3>
+          <p ng-repeat="facility in apartment.facilities">
+              <span ng-if="facility.status">
+                - {{facility.name}}
+              </span>
+          </p>
+      </md-whiteframe>
+
+      <md-whiteframe class="md-whiteframe-1dp"  flex="grow"  layout="column" layout-align="center start" style="margin-bottom:1em;margin-top:1em; padding:.2em .4em" ng-hide="isLocked">
+          <div layout="row" flex="grow" style="margin-bottom:1em; width:100%">
+              <h3 style="font-weight:bold;">
+                 <span>Agent Details<span>
+              </h3>
+              <div flex></div>
+              <ng-md-icon icon="check_circle" style="fill:green" md-menu-align-target ></ng-md-icon>
+          </div>
+          <div layout="row" layout-sm="column" style="width:100%">
+              <span>
+                  <img src="src/img/user.png" style="width:120px; margin-right:1em" alt="">
+              </span>
+              <span layout="column" style="width:100%">
+                  <span style="color:blue; margin-bottom:.2em">
+                      <b>{{agentDetails.fullname}}</b>.
+                      
+                  </span>
+                  <h3 style="margin-bottom:.2em; color:#689A5A">
+                       {{agentDetails.agency_name}}.
+                  </h3>
+                 
+                  <div layout="row" flex="grow" style="margin-bottom:.3em; width:100%">
+                        <span>+234{{agentDetails.phone.substr(1)}}.</span>
+                       <div flex></div>
+                        <ng-md-icon icon="phone" md-menu-align-target ></ng-md-icon>
+                  </div>
+                  <div layout="row" flex="grow" style="margin-bottom:.3em; width:100%">
+                       <span>{{agentDetails.email}}.</span>
+                       <div flex></div>
+                        <ng-md-icon icon="mail" md-menu-align-target ></ng-md-icon>
+                  </div>
+              </span>
+          </div>
+      </md-whiteframe>
+
+       <md-whiteframe class="md-whiteframe-1dp" flex="grow" layout="column" layout-align="center start" style="margin-bottom:1em;margin-top:1em; padding:.2em .4em" ng-hide="isLocked">
+          <div layout="column" style="width:100%">
+              <h3 style="font-weight:bold;">
+                 <span>Map and Directions<span>
+              </h3>
+              <div style="width:100%">
+                 <!--Custom directive my-maps, we will get our map in here-->
+                 <my-maps id="map-canvas"></my-maps>
+              </div>
+          </div>
+      </md-whiteframe>
+
+       <md-whiteframe class="md-whiteframe-1dp"  flex="grow"  layout="column" layout-align="center start" style="margin-bottom:1em;margin-top:1em; padding:.2em .4em">
+          <div layout="row" flex="grow" style="margin-bottom:1em; width:100%">
+              <h3 style="font-weight:bold;">
+                 <span>Reviews<span>
+              </h3>
+              <div flex></div>
+               <md-progress-circular ng-show="processing" md-diameter="20" md-mode="indeterminate"></md-progress-circular>
+          </div>
+          <div layout="column" style="margin-bottom:1em" ng-repeat="(key , val) in apartment.reviews">
+                <span style="margin-bottom:.1em">
+                     {{key}}
+                </span>
+                <span>
+                    <ng-md-icon icon="{{i<=val ? 'star' : 'star_outline'}}" ng-repeat="i in [1,2 ,3 ,4, 5 ,6 ,7,8,9,10]" ng-click="setReview(key , i)" style="fill:{{getColor(val , i)}}; margin-right:.1em" md-menu-align-target ></ng-md-icon>
+                </span>
+            </div>
+      </md-whiteframe>
+
+      
+      <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center start" style="margin-bottom:1em;margin-top:1em; padding:.2em .4em">
+         <span >
+                <md-button aria-label="social" class="md-raised md-mini">
+                  <ng-md-icon icon="share" style="fill:green" md-menu-align-target ></ng-md-icon>
+                </md-button>
+
+                <md-button aria-label="twitter"  class="md-fab md-raised md-mini"
+                  socialshare
+                  socialshare-provider="twitter"
+                  socialshare-via="palingram"
+                  socialshare-text="{{sharePost}}"
+                  socialshare-hashtags="#studenthousing"
+                  socialshare-url="{{link}}">
+                  <ng-md-icon icon="twitter" style="fill:#5bc0de" md-menu-align-target ></ng-md-icon>
+                </md-button>
+
+                 <md-button aria-label="facebook"  class="md-fab md-raised md-mini"
+                    socialshare
+                    socialshare-provider="facebook"
+                    socialshare-text="{{sharePost}}"
+                    socialshare-url="{{link}}">
+                  <ng-md-icon icon="facebook" style="fill:#337ab7" md-menu-align-target ></ng-md-icon>
+                </md-button>
+
+                <md-button aria-label="google-plus"  class="md-fab md-raised md-mini"
+                    socialshare
+                    socialshare-provider="google+"
+                    socialshare-text="{{sharePost}}"
+                    socialshare-url="{{link}}">
+                  <ng-md-icon icon="google-plus" style="fill:#d9534f" md-menu-align-target ></ng-md-icon>
+                </md-button>
+          </span>
+      </md-whiteframe> 
+  </div>
+   <div flex-gt-md="33" ng-show="bigScreen" style="padding:0; padding-left:1em">
+         <ads-box></ads-box>
+    </div>
+</md-content>

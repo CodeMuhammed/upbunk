@@ -1,0 +1,65 @@
+
+<md-dialog aria-label="{{apartment.description}}"  ng-cloak>
+  <form >
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h4>{{apartment.name }}</h4>
+      <span flex></span>
+       <md-menu>
+          <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+            <ng-md-icon icon="phone"  style="fill:#000" md-menu-align-target></ng-md-icon>
+          </md-button>
+          <md-menu-content width="4" layout="column">
+            <md-menu-item>
+              <md-whiteframe class="md-whiteframe-1dp"> <span md-menu-align-target>{{apartment.contact_details.phone}}</span>
+              </md-whiteframe>
+            </md-menu-item>
+             <md-menu-item>
+              <md-whiteframe class="md-whiteframe-1dp"> <span md-menu-align-target>{{apartment.contact_details.email}}</span>
+              </md-whiteframe>
+            </md-menu-item>
+          </md-menu-content>
+      </md-menu>
+     <md-button class="md-icon-button">
+        <ng-md-icon icon="lock"  style="fill:#red" md-menu-align-target></ng-md-icon>
+     </md-button>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <ng-md-icon icon="highlight_remove"  style="fill:#000" md-menu-align-target></ng-md-icon> 
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout="column" layout-align="center center" >
+
+   
+    <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center end" style="margin-bottom:1em; padding:.2em .4em;" md-swipe-left="next()" md-swipe-right="prev()">
+      <div style="min-height:5em"></div>
+      <div layout="row" layout-align="center center" style="width:30em;margin-top:5em; height:20em; background: url( {{apartment.images_url[startIndex]}}) center center no-repeat; background-size:cover">
+            <ng-md-icon icon="chevron_left" ng-click="prev()" style="fill:#fff" md-menu-align-target></ng-md-icon>
+            <div flex></div>
+            <ng-md-icon icon="chevron_right"ng-click="next()"  style="fill:#fff" md-menu-align-target></ng-md-icon>
+      </div>
+    </md-whiteframe>
+
+    <md-whiteframe class="md-whiteframe-1dp" layout-align="center end" style="margin-bottom:1em; width:30em; margin-top:1em; padding:.2em .4em">
+     <p style="min-height:5em">
+        {{apartment.description}}
+     </p>
+  </md-whiteframe>
+
+  <md-whiteframe class="md-whiteframe-2dp" layout-align="center end" style="margin-bottom:1em; width:30em; margin-top:1em; padding:.2em .4em">
+      <h2 style="font-weight:bolder;">
+
+         Available facilities
+      </h2>
+      <p ng-repeat="facility in apartment.facilities">
+          <span ng-show="facility.status">
+            <ng-md-icon icon="arrow_drop_down"  style="fill:blue" md-menu-align-target></ng-md-icon>
+            <b>{{facility.name}}</b>
+          </span>
+          <div flex></div>
+      </p>
+  </md-whiteframe>
+  
+  </form>
+</md-dialog>
+

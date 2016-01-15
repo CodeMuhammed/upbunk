@@ -1,0 +1,32 @@
+{
+	"FAQ":[
+	   {
+	      "title":"What is Upbunk ?",
+	      "description":"Upbunk is a service that makes the search for student apartments , roommates , and fairly used students items, simple and easy."
+	   },
+	   {
+	      "title":"How does apartment search work ?",
+	      "description":"Our team have done all the hard work of curating hundreds of image rich slide-shows of hostels located around your university and indexed them on our database, when you arive at the homepage, you provide the key descriptions of your dream apartment and click on the search button, results of apartments in that particular area are returned, giving you plenty of choices to choose from, when you find an apartment you are interested in, you simply call or email the contact details the agent provided."
+	   },
+	   {
+	   	   "title":"How does roommates search works ?",
+	   	   "description":"Roomates are basically people with common interests. On upbunk, there are two steps involved when searching for a roomate 1. Indicate interest in an apartment you find, 2. Browse through the list of people who have also indicated interest in that particular apartment. If you like what you see on their profile, you can then contact them."
+	   },
+	   {
+	   	  "title":"what is bunkshop ?",
+	   	  "description":"bunkshop is the most economical and efficient way students can buy new or fairly used items such as electronics, books , beds , chairs etc that has been listed by other students on bunkshop for sale. "
+	   },
+	   {
+	   	  "title":"Why do i signup before using upbunk ? ",
+	   	  "description":"Upbunk as an incorporated social platform respects the privacy and safety of students, we work closely with the biometrics data provided by your university to minimize the level of fake identities, especially when it comes to roommates search. Another important reason why you need to login is to be able to list items for sale on bunkshop"
+	   },
+	   {
+	   	  "title":"Do i pay for using upbumk",
+	   	  "description":"Upbunk has a freemium plan for users only interested in browsing for apartments and roomates. When a user is interested in listing an item for sale, a commission of 5% - 10% of the total cost of the item is charged for every successful sale made."
+	   },
+	   {
+	   	  "title":"Can i list my apartment on upbunk ?",
+	   	  "description":"Yes any upbunk user can create an apartment listing when the following criteria are met. 1. Have been certified by upbunk as an agent . 2.Have a minimum of 5 apartments for rent. For more information on how to be an agent for upbunk.com call +2348101639251"
+	   }
+	]
+}

@@ -1,0 +1,98 @@
+<md-toolbar style="background-color:#f0f0f0">
+  <div class="md-toolbar-tools md-toolbar-tools-bottom">
+    <md-button class="" ui-sref="o.search" ng-show="!bigScreen()">
+       <ng-md-icon icon="arrow_back"  style="fill:#0000" md-menu-align-target></ng-md-icon> Search
+    </md-button>
+    <div flex></div>
+
+    <ng-md-icon ng-click="toggleUnlocked()" ng-hide="processing" icon="lock_open"  style="fill:{{unlockedActive ? '#689A5A' : '#ccc'}}; margin-right:1em" md-menu-align-target></ng-md-icon>
+
+    <ng-md-icon ng-click="toggleFavourites()" ng-hide="processing" icon="{{favouritesActive ? 'favorite' : 'favorite_outline'}}"  style="fill:{{favouritesActive ? 'red' : '#ccc'}}" md-menu-align-target></ng-md-icon>
+
+    <md-progress-circular ng-show="processing" md-diameter="20" md-mode="indeterminate"></md-progress-circular>
+  </div>
+</md-toolbar>
+<md-content  layout="row" class="listing">
+  <div flex-sm="100" flex-gt-md="67">
+         <md-whiteframe class="md-whiteframe-2dp" flex="grow" layout = "column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em" ng-hide="favouritesActive || unlockedActive">
+          <h3>
+             <span style="background:#E9EAED; border-radius:3px; margin-right:.2em; padding-left:.3em">
+                 {{searchFields[2].selectedItem || searchFields[2].placeholder}}
+                 <md-menu md-offset="0 -5">
+                    <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+                      <ng-md-icon icon="arrow_drop_down"  style="fill:blue" md-menu-align-target></ng-md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                      <md-menu-item ng-repeat="item in searchFields[2].querySearch()">
+                        <md-button ng-click="announceClick(item , 2)"> {{item}} </md-button>
+                      </md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+             </span>
+             apartments in 
+             <b style="bolder">{{searchFields[0].selectedItem || searchFields[0].placeholder}}</b>
+             <b style="bolder">{{searchFields[1].selectedItem || searchFields[1].placeholder}}</b>
+             Within the price range of
+              <span style="background:#E9EAED; border-radius:3px; margin-right:.2em; padding-left:.3em">
+                 {{searchFields[3].selectedItem || searchFields[3].placeholder}}
+                 <md-menu md-offset="0 -5">
+                    <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+                      <ng-md-icon icon="arrow_drop_down"  style="fill:blue" md-menu-align-target></ng-md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                      <md-menu-item ng-repeat="item in searchFields[3].querySearch()">
+                        <md-button ng-click="announceClick(item , 3)"> {{item}} </md-button>
+                      </md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+             </span>
+              located in <b>{{searchFields[4].selectedItem || searchFields[4].placeholder}}</b> area
+           </h3>
+        </md-whiteframe>
+
+        <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em;" ng-show="favouritesActive || unlockedActive">
+            <h3 style="min-width:{{bigScreen() ? '44em' : ''}}">Your 
+              <span ng-show="favouritesActive && !(favouritesActive && unlockedActive)">favourite</span> 
+              <span ng-show="favouritesActive && unlockedActive">unlocked</span> 
+              listings</h3>
+        </md-whiteframe>
+
+        <md-whiteframe class="md-whiteframe-1dp" layout="column" layout-align="start start" style="min-height:15em; margin-bottom:2em" ng-repeat="apartment in apartments"> 
+            <md-toolbar style="padding-top:.7em; background:#f0f0f0" >
+              <div class="md-toolbar-tools md-toolbar-tools-bottom" layout="row">
+                <h4 style="font-weight:bolder">
+                 {{apartment.name}}
+                </h4>
+                <div flex></div>
+                  <md-button class="md-icon-button" ng-click="showApartment($event , apartment)">
+                    <ng-md-icon icon="view_carousel"  style="fill:#000" md-menu-align-target></ng-md-icon>
+                  </md-button>
+                  <md-button class="md-icon-button" ng-show="isOwner(apartment.lister_username)" ng-click="editListing(apartment._id)">
+                      <ng-md-icon icon="edit" style="fill:#000" md-menu-align-target></ng-md-icon>
+                   </md-button>
+                   <md-button class="md-icon-button" ng-show="isOwner(apartment.lister_username)" ng-click="deleteListing(apartment , $event)">
+                      <ng-md-icon icon="delete" style="fill:red" md-menu-align-target></ng-md-icon>
+                   </md-button>
+              </div>
+            </md-toolbar>
+
+            <div style="overflow:auto; height:230px;width:100%;white-space:nowrap">
+               <img ng-repeat = "image in apartment.images_url" ng-src="{{image}}" style="width:240px; height:200px; margin-right:.4em" alt="Student apartments in {{apartment.location}} , {{apartment.school}} , {{apartment.state}}">
+            </div>
+
+        </md-whiteframe>
+        <md-whiteframe class="md-whiteframe-1dp" layout="column" layout-align="center center" style="min-height:15em; margin-bottom:.5em; padding:1em;" ng-show="noResult">    
+           <img ng-src="src/img/404.png" width="200">
+           <h4 style="font-size:bolder">Oops ! it seems nobody have listed an apartment based on your search query</h4>
+       </md-whiteframe>
+        
+       <div class="wrapper" style="margin-top:4em">
+          <wan-material-paging wmp-total="total" goto-page="gotoPage()" position="center" current-page="currentPage" step="step">
+          </wan-material-paging>
+        </div>
+  </div>
+   <div flex-gt-md="33" ng-show="bigScreen()" style="padding:0; padding-left:1em">
+         <ads-box></ads-box>
+    </div>
+  
+</md-content>

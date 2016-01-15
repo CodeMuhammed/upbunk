@@ -1,0 +1,29 @@
+<md-toolbar style="background-color:#f0f0f0">
+    <div class="md-toolbar-tools" layout="row">
+      <h2 class="md-flex"><b>FAQ</b></h2>
+      <div flex></div>
+      <span> +2348101639251</span>
+    </div>
+</md-toolbar>
+<md-content layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;">
+
+	  <div flex-sm="100" flex-gt-md="67">
+		  	 <md-whiteframe class="md-whiteframe-1dp" flex="grow" layout="column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em" ng-repeat="Q in FAQ">
+	          <md-button ng-click="setActive($index)">
+	          	   <span style="bolder; font-size:2em; margin-right:.1em" ng-hide="$index == activeIndex">+</span>
+	          	   <span style="bolder; font-size:2em; margin-right:.1em" ng-show="$index == activeIndex">-</span>
+	               <span style="font-size:.9em">{{Q.title}}</span>
+	          </md-button>
+	          
+	          <md-content ng-show="$index == activeIndex" style="padding:.2em .1em .2em 1.4em">
+		          <p >
+		          	  {{Q.description}}
+		          </p>
+		       </md-content>
+	        </md-whiteframe>
+	  </div>
+	  <div flex-gt-md="33" ng-show="bigScreen()" style="padding:0 1em">
+	       <ads-box></ads-box>
+	  </div>
+  
+</md-content>

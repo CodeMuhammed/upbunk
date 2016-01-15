@@ -1,0 +1,137 @@
+<div layout="row" layout-align="center end" class="header" >
+    <div flex-gt-sm="67" layout="column" layout-align="center center" style="width:100%">
+         <img src="src/img/logo.c.t.gif" style="width:50%">
+         <md-whiteframe class="md-whiteframe-1dp " style="width:100%; text-align:center">
+           <div class="" style="padding:1em; background-color:#fff" layout="row">
+                <h3 style="font-weight:bolder;">
+                       {{listing._id ? listing.name : 'New Apartment Listing'}}
+                </h3>
+                <div flex></div>
+                <md-checkbox ng-checked="listing.availability" ng-click="listing.availability =! listing.availability" aria-label ="t">
+                </md-checkbox>
+           </div>
+
+         </md-whiteframe>
+    </div>
+</div>
+<md-content layout="row" layout-align="center start" layout-padding layout-wrap layout-fill style="padding-bottom: 32px; background: url('src/img/bg-d.gif');">
+      <div layout="row" flex-sm="100" flex-gt-md="67"  >
+             <div flex-sm="100" flex-gt-md="67"  >
+          
+                <md-content layout-padding layout="column">
+                   
+  
+                  <md-whiteframe class="md-whiteframe-2dp" flex layout-align="center end" style="margin-bottom:1em; padding:.2em .4em">
+                      <h4 style="font-weight:bolder;">
+                       Agent Details
+                      </h4>
+                   </md-whiteframe>
+                   <form name="Search">
+                        <md-input-container style="width:100%">
+                          <label>Search by phone number</label>
+                          <input ng-model="listing.agent_phone" ng-change="searchForAgent(listing.agent_phone)" type="phone" name="phone" phone>
+                          <div ng-messages="Search.phone.$error">
+                              <div ng-message="phone">The phone number is not valid</div>
+                          </div>
+                        </md-input-container>
+                   </form>
+                   
+                   <div layout="row" layout-align="start center" ng-show="agentsearch">
+                         <md-progress-circular md-diameter="20" md-mode="indeterminate"></md-progress-circular>
+                        searching for agent....
+                   </div>
+
+                  <form ng-show="searchdone" name="Agent">
+                      <md-input-container style="width:100%">
+                        <label>Email Address</label>
+                        <input ng-model="agentDetails.email" type="email" name="email" required>
+                        <div ng-messages="Agent.email.$error">
+                              <div ng-message="required">Email required</div>
+                        </div>
+                      </md-input-container>
+
+                      <md-input-container style="width:100%">
+                        <label>Phone Number</label>
+                        <input ng-model="agentDetails.phone" type="phone" name="phone" phone>
+                        <div ng-messages="Agent.phone.$error">
+                              <div ng-message="phone">The phone number is not valid</div>
+                        </div>
+                      </md-input-container>
+
+                      <md-input-container style="width:100%">
+                        <label>Full name</label>
+                        <input ng-model="agentDetails.fullname" type="text" name="name" required>
+                        <div ng-messages="Agent.name.$error">
+                              <div ng-message="required">name required</div>
+                        </div>
+                      </md-input-container style="width:100%">
+
+                      <md-input-container style="width:100%">
+                        <label>Agency name</label>
+                        <input ng-model="agentDetails.agency_name" type="text" required name="agency">
+                        <div ng-messages="Agent.agency.$error">
+                              <div ng-message="required">Agency name required</div>
+                        </div>
+                      </md-input-container style="width:100%">
+                  </form>
+                  
+                  <md-whiteframe class="md-whiteframe-2dp" flex layout-align="center end" style="margin-bottom:1em; padding:.2em .4em">
+                      <h4 style="font-weight:bolder;">
+                       Apartment Details
+                      </h4>
+                  </md-whiteframe>
+                  <form name="ApartmentForm">
+                       <md-input-container style="width:100%">
+                            <label>Apartment Name</label>
+                            <textarea ng-model="listing.name" columns="1" md-maxlength="40"></textarea>
+                        </md-input-container>
+                        <md-input-container style="width:100%">
+                              <label>Apartment Description</label>
+                              <textarea ng-model="listing.description" columns="1" rows="4" md-maxlength="1000"></textarea>
+                        </md-input-container>
+                  </form>
+                  
+                  <md-input-container style="width:100%" ng-repeat="field in searchFields">
+                      <label>{{field.placeholder}}</label>
+                      <md-select ng-model="field.selectedItem">
+                        <md-option ng-repeat="item in field.querySearch()" value="{{item}}" ng-click="field.selectedItemChange(item)">
+                          {{item}}
+                        </md-option>
+                      </md-select>
+                  </md-input-container>
+                  
+                   <md-whiteframe class="md-whiteframe-2dp" flex layout-align="center end" style="margin-bottom:1em; padding:.2em .4em">
+                      <h4 style="font-weight:bolder;">
+                        Special Features
+                      </h4>
+                   </md-whiteframe>
+                  <div layout="column" flex style="margin-bottom:1.5em; padding-left:0;">
+                    <div  ng-repeat="facility in listing.facilities">
+                      <md-checkbox ng-checked="exists(facility)" ng-click="toggle(facility, listing.facilities)">
+                        {{ facility.name }} 
+                      </md-checkbox>
+                    </div>
+                  </div>
+                 
+                  <my-uploader></my-uploader>
+
+                  <div style="overflow:auto; height:230px;width:100%;white-space:nowrap">
+                       <img ng-repeat = "image in listing.images_url" ng-src="{{image}}" style="width:240px; height:200px; margin-right:.4em" alt="Student apartments images" ng-click="deleteImage(image , $event)">
+                  </div>
+
+                  <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center end" style="margin-top:1em; padding:0">
+                          <md-button class=" md-raised md-primary md-cornered"  style="margin:0px; width:100%; color:#fff" ng-click="saveListing()" ng-disabled="(Agent.$invalid || Search.$invalid || ApartmentForm.$invalid || minReq())">
+                                 Save Listing
+                                 <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+                          </md-button>
+                          <md-progress-linear md-mode="indeterminate" ng-show="processing"></md-progress-linear>
+                  </md-whiteframe>
+
+                </md-content>
+          </div>
+          <div flex-gt-md="33" ng-show="bigScreen()" style="padding:0 1em">
+              <ads-box></ads-box>
+          </div> 
+      </div>
+     
+</md-content>

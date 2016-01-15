@@ -1,0 +1,238 @@
+.header {
+  width: 100%;
+  padding: 0px 5px;
+  background: url('../src/img/houses.jpg') center center no-repeat;
+  background-size: cover;
+}
+.header > div {
+  height: 600px;
+  padding: 1em 0;
+}
+@media (max-width: 991px) {
+  .header > div {
+    height: 500px;
+  }
+}
+.header > div .inner {
+  text-align: center;
+  width: 100%;
+}
+.header > div .inner .heading {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1em;
+  padding-top: 2em;
+  min-height: 17em;
+  width: 100%;
+}
+@media (max-width: 991px) {
+  .header > div .inner .heading {
+    border-radius: 0px;
+  }
+}
+.header > div .inner .heading .search-dummy {
+  width: 100%;
+  margin-top: 4em;
+}
+.header > div .inner .heading .search-dummy > div {
+  height: 3em;
+}
+.header > div .inner .heading .search-dummy > div:first-child {
+  width: 85%;
+  background-color: #fff;
+}
+.header > div .inner .heading .search-dummy > div:last-child {
+  width: 15%;
+  background-color: #689A5A;
+  color: #fff;
+}
+.header > div .inner .heading .text {
+  text-shadow: .01em .01em #ccc;
+  color: #f0f0f0;
+  font-weight: light;
+}
+.header > div .inner .heading .text h1 {
+  font-size: 3em;
+  margin-bottom: .3em;
+  font-weight: bold;
+}
+.header > div .inner .heading .text span {
+  font-size: 1.3em;
+}
+@media (max-width: 991px) {
+  .header > div .inner .heading .text h1 {
+    font-size: 2em;
+  }
+  .header > div .inner .heading .text span {
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 991px) {
+  .main-toolbar {
+    padding: 0 !important;
+  }
+}
+.sub-header {
+  height: 1em !important;
+}
+.result-view {
+  margin-bottom: 1em;
+  padding: .2em .4em;
+}
+.result-view > div {
+  width: 100%;
+  height: 30em;
+}
+@media (max-width: 991px) {
+  .result-view > div {
+    height: 18em;
+  }
+}
+.listing {
+  padding: 30px;
+}
+@media (max-width: 991px) {
+  .listing {
+    padding: 10px;
+  }
+}
+.features {
+  padding: 0px;
+  padding-top: 2em;
+  background-color: #689a5a;
+  min-height: 30em;
+}
+.features .f-header {
+  color: #fff;
+  font-size: 2.5em;
+  margin-bottom: 1.5em;
+  font-weight: bolder;
+}
+.features .f-div .center-f {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.features .f-div > div {
+  margin-bottom: 3em;
+  width: 300px;
+}
+.features .f-div > div h2 {
+  font-weight: bolder;
+}
+.features .f-div > div .text {
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+}
+@media (max-width: 991px) {
+  .features .f-div > div .text {
+    font-size: .9em;
+  }
+}
+.traction {
+  background: url('../src/img/traction.jpg') center center no-repeat;
+  background-size: cover;
+  height: 30em;
+}
+.traction .text {
+  padding-left: 5em;
+}
+.traction .text h1 {
+  font-size: 3em;
+  line-height: 1.2em;
+}
+.traction .text > span {
+  padding: 1em;
+  border: 3px solid #689A5A;
+  height: 2em;
+  margin-top: 1.2em;
+  font-size: 1.5em;
+  color: #689A5A;
+}
+.traction .text > span:hover {
+  display: inline-block;
+  color: #fff;
+  background-color: #689A5A;
+}
+@media (max-width: 991px) {
+  .traction .text {
+    padding-left: 1em;
+    line-height: .7em;
+  }
+}
+#map-canvas {
+  height: 400px;
+  width: 100%;
+  border: 2px solid #689A5A;
+}
+@media (max-width: 991px) {
+  #map-canvas {
+    height: 300px;
+  }
+}
+.footer {
+  height: 30em;
+  width: 100%;
+  padding: 5px;
+  background-color: #343742;
+}
+.footer .footer-sm {
+  width: 100%;
+  padding: 0;
+}
+.footer .footer-sm .inner {
+  padding: .7em;
+  width: 100%;
+  text-align: center;
+}
+.footer .footer-sm .inner span {
+  display: block;
+}
+.footer .footer-sm .inner span:first-child {
+  margin-top: 1em;
+  color: #000;
+  font-weight: light;
+  font-size: 1em;
+  padding-bottom: .2em;
+}
+.footer .footer-sm .inner span:last-child {
+  color: #000;
+  font-weight: light;
+  font-size: 1em;
+}
+.footer .footer-sm .inner span:last-child a {
+  outline: none;
+  text-decoration: none !important;
+  display: inline-block;
+  font-weight: bold;
+  color: #B0B5BE;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+.footer .footer-sm .inner span:last-child a:hover {
+  color: #689A5A;
+}
+.footer .footer-lg {
+  height: 20em;
+  padding: 0;
+}
+.footer .footer-lg .section {
+  height: 20em;
+  color: #B0B5BE;
+  width: 33%;
+}
+.footer .footer-lg .section h3 {
+  font-weight: bold;
+  color: #fff;
+}
+.footer .footer-lg .section > span {
+  display: inline-block;
+  width: 100%;
+  font-size: 1.3em;
+  margin-bottom: .7em;
+}
+.footer .footer-lg .section > span:hover {
+  color: #fff;
+}
+.mdac > input {
+  padding: 2em;
+}

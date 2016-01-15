@@ -1,0 +1,21 @@
+{
+  "objectArray" : [
+     {
+         "state" : "Edo",
+         "schools": [
+             {
+               "name" : "UNIBEN",
+               "locations" : [
+                  "BDPA" , "Ekosodin" , "Osasogie" , "Wasota" , "Isihor"
+               ]
+             },
+             {
+               "name" : "AAU",
+               "locations" : [
+                  "Ikhiro" , "Eko" , "sogie" , "asota" , "sihor"
+               ]
+             }
+         ]
+     }
+   ]
+ }

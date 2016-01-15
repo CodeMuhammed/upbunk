@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>upbunk | students apartment search | students room-mates search | students space-sharing | and students marketplace</title>
+    <meta name="description" content="Search, Share and Shop. for Students' Aparments...Upbunk is a service that makes the search for student apartments , roommates , and fairly used students items, simple and easy.">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+    
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="assets/app.css"/>
+    <link rel="stylesheet" href="docs.css"/>
+    <link rel="stylesheet" href="css/custom.css"/>
+    
+    <!--Angular material icons addons-->
+    <link rel="stylesheet" href="bower_components/angular-material-icons/angular-material-icons.css"/>
+
+    <!--Angular material sidenav menu addons-->
+    <link rel="stylesheet" href="bower_components/angular-material-sidenav-master/angular-material-sidenav.css"/>
+  </head>
+
+  <body ng-app="starterApp" layout="row" ng-cloak >
+  
+
+    <md-content ui-view md-scroll-y flex></md-content>
+    
+    
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular/angular-messages.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <!--Angular material icons addons-->
+	  <script type="text/javascript" src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+
+    <!--Angular material sidenav menu addons-->
+    <script type="text/javascript" src="bower_components/angular-material-sidenav-master/angular-material-sidenav.js"></script>
+
+    <!--Angular material paging addons-->
+    <script src="bower_components/angular-material-paging-master/src/angular-material-paging.js"></script>
+    
+    <!--My custom controllers and serrvices-->
+    <script src="src/users/customControllers.js"></script>
+    <script src="src/users/customDirectives.js"></script>
+    <script src="src/users/customServices.js"></script>
+
+    <!--Angularjs social share components-->
+    <script src="bower_components/720k-social/angular-socialshare.min.js"></script>
+
+    <!--my custom image uploader-->
+    <script src="bower_components/nguploader/ng-file-upload.js"></script>
+    <script src="bower_components/nguploader/ng-file-upload-shim.js"></script>
+    <script src="bower_components/nguploader/upload.js"></script>
+    <script src="https://uploadhandler.herokuapp.com/files/clients/js/uploadService.js"></script>
+    <script type="text/javascript">
+      FileAPI = {
+        debug: true,
+      };
+    </script>
+    
+    <!--configurations and sertups-->
+    <script type="text/javascript">
+      
+          angular
+              .module('starterApp', ['ngMaterial', 'customServices' , 'customControllers' , 'customDirectives' ,  'ngMdIcons' , '720kb.socialshare' ,'ui.router' , 'sasrio.angular-material-sidenav' , 'fc.paging' , 'fileUpload'  , 'ngMessages'])
+
+              //Theming and sidenav menu configuration
+              .config(function($mdThemingProvider, $mdIconProvider , $locationProvider, $urlRouterProvider, $stateProvider, ssSideNavSectionsProvider){
+
+                  $mdIconProvider
+                      $mdThemingProvider.theme('default')
+                          .primaryPalette('green')
+                          // If you specify less than all of the keys, it will inherit from the
+                          // default shades
+                          .accentPalette('amber');
+
+                    ssSideNavSectionsProvider.initWithTheme($mdThemingProvider);
+                    ssSideNavSectionsProvider.initWithSections([{
+                        id: 'link_4',
+                        name: 'Blog',
+                        state: 'o.FAQ',
+                        type: 'link'
+                    },
+                    {
+                       id: 'link_5',
+                       name: 'Legal',
+                       type: 'heading',
+                       children: [
+                          {
+                              id: 'link_6',
+                              name: 'About US',
+                              state: 'o.about',
+                              type: 'link'
+                          },
+                          {
+                              id: 'link_7',
+                              name: 'Privacy',
+                              state: 'o.privacy',
+                              type: 'link'
+                          },
+                          {
+                              id: 'link_8',
+                              name: 'FAQ ',
+                              state: 'o.FAQ',
+                              type: 'link'
+                          },
+                          {
+                              id: 'link_9',
+                              name: 'Disclaimer',
+                              state: 'o.disclaimer',
+                              type: 'link'
+                          }
+                       ]
+                    }]);
+
+              })
+
+              // cors configurations to enable consuming the rest api
+              .config([
+                  '$httpProvider' , 
+                  function($httpProvider){
+                     $httpProvider.defaults.useXDomain = true;
+                     $httpProvider.defaults.withCredentials = true;
+                     delete $httpProvider.defaults.headers.common['X-Requested-With'];
+                  }
+              ])
+
+               //state configuration and routing setup
+              .config([
+                '$stateProvider' , '$urlRouterProvider'  , '$locationProvider',
+                function($stateProvider , $urlRouterProvider  , $locationProvider){
+                      //enabling Hash bang mode
+                      $locationProvider.html5Mode(false).hashPrefix('!');
+
+                      $stateProvider
+                      .state('o' , {
+                         url : '/o',
+                         abstract : true,
+                         templateUrl : 'views/view.tpl.html',
+                         controller  : 'mainController'
+                     })
+                      $stateProvider
+                          .state('o.search' , {
+                             url : '/search',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/search.tpl.html',
+                                   controller  : 'searchController'
+                                }
+                             },  
+                             data : {}
+                         })
+                         .state('o.search.results' , {
+                             url : '/results',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/s_results.tpl.html',
+                                   controller  : 's_resultsController'
+                                }
+                             },
+                             data : {}
+                         })
+                         .state('o.search.roommates' , {
+                             url : '/roommates',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/s_roommates.tpl.html',
+                                   controller  : 's_roommatesController'
+                                }
+                             },
+                             data : {}
+                         })
+                         .state('o.search.results.id' , {
+                             url : '/:id',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/s_result.tpl.html',
+                                   controller  : 's_resultController'
+                                }
+                             },
+                             data : {}
+                         })
+                         
+                          .state('o.FAQ' , {
+                             url : '/FAQ',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/FAQ.tpl.html',
+                                   controller  : 'FAQController'
+                                }
+                             },
+                             data : {}
+                         })
+                          .state('o.about' , {
+                             url : '/about',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/about.tpl.html',
+                                   controller  : 'FAQController'
+                                }
+                             },
+                             data : {}
+                         })
+                          .state('o.privacy' , {
+                             url : '/privacy',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/privacy.tpl.html'
+                                }
+                             },
+                             data : {}
+                         })
+                          .state('o.disclaimer' , {
+                             url : '/disclaimer',
+                             views : {
+                                'h_space@o' : {
+                                   templateUrl : 'views/disclaimer.tpl.html'
+                                }
+                             },
+                             data : {}
+                         });
+                         
+                         $urlRouterProvider.otherwise('/o/search');
+                    }
+
+
+            ]);
+
+    </script>
+
+    <!--Start of Zopim Live Chat Script-->
+    <script type="text/javascript">
+    window.$zopim||(function(d,s){var z=$zopim=function(c){
+    z._.push(c)},$=z.s=
+    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+    $.src='//v2.zopim.com/?3ZZnHAwbZrdfNj8nqTjmbnBtUkpZzsSE';z.t=+new Date;$.
+    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+    </script>
+    <!--End of Zopim Live Chat Script-->
+
+    <!--start google maps integration-->
+    <script type="text/javascript"
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcmzZL8-rq_zmFjSIrRyH2Xb0p94uDYrQ">
+    </script>
+
+    <!--End of google maps  Script-->
+
+
+  </body>
+</html>

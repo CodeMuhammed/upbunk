@@ -1,0 +1,76 @@
+<div layout="row" layout-align="center center" class="header">
+    <div flex-gt-sm="67" layout="column" layout-align="center center" >
+        <md-whiteframe class="md-whiteframe-0dp" flex="grow" layout="column" layout layout-align="center center" style="margin-bottom:1em; padding:0em .4em; min-height:15em">
+               <md-whiteframe layout="column" layout-align="start start" style="margin-bottom:1em; height:10em; width:10em; background: url({{user.profile_details.img}}) center center no-repeat; background-size:cover" >
+                     <mini-uploader></mini-uploader>
+               </md-whiteframe>
+               <md-whiteframe layout="column" layout-align="center center">
+                  <h2>{{user.username}}</h2>
+               </md-whiteframe>
+        </md-whiteframe>
+    </div>
+</div>
+
+
+
+   <md-content layout="row" layout-align="center start" layout-padding layout-wrap layout-fill style="padding-bottom: 32px; background: url('src/img/bg-d.gif');">
+      <div layout="row" flex-sm="100" flex-gt-md="67"  >
+             <div flex-sm="100" flex-gt-md="67" >
+          
+        <md-whiteframe class="md-whiteframe-2dp" flex="grow" layout="column" layout layout-align="start start" style="margin-bottom:1em; padding:.2em .4em; min-height:40em;background-color:#fff">
+               <md-input-container style="width:100%">
+				  <label>Fullname</label>
+				  <input ng-model="user.profile_details.fullname" type="email">
+				</md-input-container>
+			    <md-input-container style="width:100%">
+				  <label>Phone Number</label>
+				  <input ng-model="user.profile_details.phone" type="phone">
+				</md-input-container>
+				<md-input-container style="width:100%">
+				  <label>Email Address</label>
+				  <input ng-model="user.email" type="email">
+				</md-input-container>
+				<md-input-container style="width:100%">
+				  <label>Department</label>
+				  <input ng-model="user.profile_details.department" type="text">
+				</md-input-container>
+				<md-input-container style="width:100%">
+			      <label>Level</label>
+			      <md-select ng-model="user.profile_details.level">
+			        <md-option ng-repeat="level in [100 , 200 , 300 , 400 , 500 , 600 , 700]" value="{{level}}" >
+			          {{level}}
+			        </md-option>
+			      </md-select>
+			    </md-input-container>
+				<md-input-container style="width:100%">
+			      <label>Sex</label>
+			      <md-select ng-model="user.profile_details.sex">
+			        <md-option ng-repeat="sex in ['male' , 'female']" value="{{sex}}" >
+			          {{sex}}
+			        </md-option>
+			      </md-select>
+			    </md-input-container>
+
+			    <md-input-container style="width:100%">
+			        <label>Bio</label>
+			        <textarea ng-model="user.profile_details.bio" columns="1" md-maxlength="200"></textarea>
+			    </md-input-container>
+        </md-whiteframe> 
+        <md-whiteframe class="md-whiteframe-2dp" layout="column" layout-align="center end" style="margin-top:1em; padding:0">
+          <md-button class=" md-raised md-primary md-cornered"  style="margin:0px; width:100%; color:#fff" ng-click="updateUser()" >
+                 Update profile
+                 <ng-md-icon icon="keyboard_arrow_right" md-menu-align-target ></ng-md-icon>
+          </md-button>
+          <md-progress-linear md-mode="indeterminate" ng-show="processing"></md-progress-linear>
+	   </md-whiteframe>
+  </div>
+
+   <div flex-gt-md="33" ng-show="bigScreen()" style="padding:0 1em">
+	     <ads-box></ads-box>
+   </div>
+
+
+
+      </div>
+     
+</md-content>
