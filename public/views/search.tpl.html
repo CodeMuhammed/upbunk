@@ -3,35 +3,30 @@
                   <md-tab-label><ng-md-icon icon="search" md-menu-align-target ></ng-md-icon> Search</md-tab-label>
                   <md-tab-body>
 
-                     <div layout="row" layout-align="center end" class="header">
-                          <div  layout="column" layout-align="center center" >
-                               <md-whiteframe class="md-whiteframe-0dp inner" layout="column" layout-align="center center" >
-                                 <div class="heading" layout="column" layout-align="center center">
+                     <div layout="row" layout-align="start start" class="header" ng-if="!resultScreen">
+                          <div  layout="column" layout-align="start start" >
+                               <md-whiteframe class="md-whiteframe-0dp inner" layout="column" layout-align="start start" >
+                                 <div class="heading" layout="column" layout-align="start center">
 
-                                     <div class="text">
-                                         <h1>FEEL AT-HOME IN SCHOOL</h1>
+                                     <div class="text" style="margin-top:5em">
+                                         <h1>Feel At home In School</h1>
                                          <span>Choose from hundreds of apartments near your campus for rent ..</span>
                                      </div>
                                      <md-divider></md-divider>
-                                     <div class="search-dummy" layout="row" layout-align="center center" ng-show="isSmall()" flex="grow" ng-click="scrollToSearch()">
-                                         <div layout="row" layout-align="center center">
-                                             Where do you want to stay?
-                                         </div>
-                                         <div layout="row" layout-align="center center">
-                                            <md-button>
-                                                <ng-md-icon icon="search" md-menu-align-target ></ng-md-icon>
-                                            </md-button>
-                                            
-                                         </div>
-                                        
-                                     </div>
-                                  
-                                     <div layout="row" layout-align="center center" class="search" style="padding:1em .6em; margin-top:2em;"  ng-hide="isSmall()">
+                                     <md-button class="md-raised md-cornered" style="margin-top:2em; height:4em">Learm more</md-button>
+    
+                                
+                                    </div>
+                                    
+
+                               </md-whiteframe>
+                               <div class="search-bottom" layout="column" layout-align="center center" ng-if="!isSmall()">
+                                     <div layout="row" layout-align="center center" class="search" style="padding:1em .6em;"  ng-hide="isSmall()">
                                           
                                          
                                             <md-autocomplete
                                                 class="mdac"
-                                                style="margin-right:.2em; border-radius:0px;height:3em"
+                                                style="margin-right:1em; border-radius:0px;height:3em"
                                                 layout="column" layout-align="center center"
                                                 ng-repeat="field in searchFields"
                                                 style="margin-bottom:1em; width:33.3%"
@@ -65,8 +60,7 @@
                                             </md-whiteframe>
 
                                       </div>
-                                    </div>
-                               </md-whiteframe>
+                               </div>
                           </div>
                      </div>
 
@@ -105,7 +99,7 @@
                           </div>
                      </div>
 
-                    <div layout="column" layout-align="center center" style="padding: 5px; background: url('src/img/bg-d.gif');">
+                    <div layout="column" layout-align="center center" style="padding: 5px; background: url('src/img/bg-d.gif');" ng-if="resultScreen">
                           <div flex-gt-sm="67"  ng-show="processing && bigScreen()" layout="row" layout-align="center center" style=" padding:1em .6em">
                             <md-progress-circular ng-show="processing" md-diameter="20" md-mode="indeterminate"></md-progress-circular>
                                Loading results ....
@@ -116,7 +110,7 @@
                           </div>
                      </div>
                      
-                     <div class="traction" layout="column" layout-align="center start" style="">
+                     <div class="traction" layout="column" layout-align="center start" style="" ng-if="!resultScreen">
                          <div class="text" flex-gt-sm="30"  layout="column" layout-align="center start">
                               <h1>More than <span style="color:#689A5A;">200</span>
                                 <span ng-show="!bigScreen()">Properties available for rent</span></h1>
@@ -125,7 +119,7 @@
                          </div>
                      </div>
 
-                     <div class="features" layout="column" layout-align="start center">
+                     <div class="features" layout="column" layout-align="start center" ng-if="!resultScreen">
                            <div class="f-header">
                               How it works ! 
                            </div>

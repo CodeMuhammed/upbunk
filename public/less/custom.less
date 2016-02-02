@@ -38,15 +38,22 @@
 
 .header {
 	width:100%;
-    padding: 0px 5px;
+    padding: 0px 0px;
     background-size:cover;
     
     background: url('../src/img/houses.jpg') center center no-repeat;
-		      background-size:cover;
+    background-size:cover;
+  
+    .search-bottom{
+          width:100%;
+          height:100px;
+          background:rgba(0,0 ,0, .8);
+      }
     >div{
-        height:600px;
+        height:500px;
+        width:100%;
        
-        padding:1em 0;
+        padding:0em 0;
         
        @media (max-width: @screen-sm-max) {
 	       height:500px;
@@ -55,8 +62,9 @@
            text-align:center;
            width:100%;
            .heading{
+              height:500px;
               background:rgba(0,0 ,0, .6);
-              padding:1em;
+              padding:0em;
               //border-radius:20px;
 
               padding-top:2em;
@@ -66,23 +74,8 @@
 			       border-radius:0px;
 			       //max-height:10em;
 			    }
-              .search-dummy {
-                  width:100%;
-                  margin-top:4em;
-                 >div {
-                     height:3em;
-                     &:first-child{
-                        width:85%;
-                        background-color:#fff;
-                     }
-                     &:last-child{
-                        width:15%;
-                        background-color:#689A5A;
-                        color:#fff;
-                     }
-                 }
-              }
 
+             
               .text { 
                   text-shadow: .01em .01em #ccc;
                   color:#f0f0f0;
@@ -104,7 +97,9 @@
 	                   }
 				   }
               }
+              
            }
+          
         }
     }
 }
