@@ -1,6 +1,9 @@
 <md-toolbar style="background-color:#f0f0f0">
   <div class="md-toolbar-tools md-toolbar-tools-bottom">
-    <md-button class="" ui-sref="o.search">
+    <md-button class="" ui-sref="o.search" ng-if="!bigScreen()">
+       <ng-md-icon icon="arrow_back"  style="fill:#0000" md-menu-align-target></ng-md-icon> Search
+    </md-button>
+    <md-button class="" ng-click="backToSearch()" ng-if="bigScreen()">
        <ng-md-icon icon="arrow_back"  style="fill:#0000" md-menu-align-target></ng-md-icon> Search
     </md-button>
     <div flex></div>

@@ -281,6 +281,11 @@
               })
 
               //
+              $rootScope.$on('showSearch' , function(e , a){
+                   $scope.resultScreen = false;
+              })
+
+              //
               if(angular.isDefined($state.$current.data.switchEdit)){
                    if($state.$current.data.switchEdit == 1){
                         $scope.editorMode = 'auto';
@@ -298,6 +303,11 @@
           $scope.bigScreen = function(){
               return $mdMedia('gt-md');
           };
+
+          //
+          $scope.backToSearch = function(){
+               $rootScope.$broadcast('showSearch' , {});
+          }
           
           //Initial page data setup
           $scope.pageDetails = Apartment.getPageDetails();
