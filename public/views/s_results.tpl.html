@@ -17,7 +17,7 @@
 </md-toolbar>
 <md-content  layout="row" class="listing">
   <div flex-sm="100" flex-gt-md="67">
-         <md-whiteframe class="md-whiteframe-2dp" flex="grow" layout = "column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em" ng-hide="favouritesActive || unlockedActive">
+         <md-whiteframe class="md-whiteframe-1dp" flex="grow" layout = "column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em" ng-hide="favouritesActive || unlockedActive">
           <h3>
              <span style="background:#E9EAED; border-radius:3px; margin-right:.2em; padding-left:.3em">
                  {{searchFields[2].selectedItem || searchFields[2].placeholder}}
@@ -68,7 +68,7 @@
                 </h4>
                 <div flex></div>
                   <md-button class="md-icon-button" ng-click="showApartment($event , apartment)">
-                    <ng-md-icon icon="view_carousel"  style="fill:#000" md-menu-align-target></ng-md-icon>
+                    <ng-md-icon icon="remove_red_eye"  style="fill:#000" md-menu-align-target></ng-md-icon>
                   </md-button>
                   <md-button class="md-icon-button" ng-show="isOwner(apartment.lister_username)" ng-click="editListing(apartment._id)">
                       <ng-md-icon icon="edit" style="fill:#000" md-menu-align-target></ng-md-icon>
@@ -80,7 +80,7 @@
             </md-toolbar>
 
             <div style="overflow:auto; height:230px;width:100%;white-space:nowrap">
-               <img ng-repeat = "image in apartment.images_url" ng-src="{{image}}" style="width:240px; height:200px; margin-right:.4em" alt="Student apartments in {{apartment.location}} , {{apartment.school}} , {{apartment.state}}">
+               <img ng-repeat = "image in apartment.images_url" ng-src="{{image}}" style="width:240px; height:200px; margin-right:.2em" alt="Student apartments in {{apartment.location}} , {{apartment.school}} , {{apartment.state}}">
             </div>
 
         </md-whiteframe>

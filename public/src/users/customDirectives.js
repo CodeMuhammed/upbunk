@@ -85,7 +85,7 @@
                              '<span>'+
                                  '<center>'+
                                     '<div>'+
-                                      '<iframe scrolling="no" src="//blockadz.com/ads/show/show.php?a=DU8OFDNNHK2EZ&b=U2895NMB0XBJ6" style="overflow:hidden;width:300px;height:250px;" frameborder="0"></iframe>'+
+                                      '<iframe scrolling="no" src="//blockadz.com/ads/show/show.php?a=DU8OFDNNHK2EZ&b=U2895NMB0XBJ6" style="overflow:hidden;width:100%;height:250px;" frameborder="0"></iframe>'+
                                     '</div>'+
                                   '</center>'+
                              '</span>'+

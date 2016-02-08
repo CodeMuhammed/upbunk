@@ -9,7 +9,7 @@
 <md-content layout="row" class="listing">
   
   <div flex-sm="100" flex-gt-md="67">
-          <md-whiteframe class="md-whiteframe-2dp" flex="100" layout = "column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em" ng-hide="!bigScreen">
+          <md-whiteframe class="md-whiteframe-1dp" flex="100" layout = "column" layout-align="start top" style="margin-bottom:1em; padding:.2em .4em" ng-hide="!bigScreen">
               <h3>
                  {{searchFields[2].selectedItem || searchFields[2].placeholder}} 
                  apartments in 
@@ -62,8 +62,8 @@
           <h3 style="font-weight:bold;">
              Available facilities
           </h3>
-          <p ng-repeat="facility in apartment.facilities">
-              <span ng-if="facility.status">
+          <p ng-repeat="facility in apartment.facilities" ng-if="facility.status">
+              <span >
                 - {{facility.name}}
               </span>
           </p>
